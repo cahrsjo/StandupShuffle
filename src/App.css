@@ -1,38 +1,109 @@
 .App {
-  text-align: center;
+  background:url(
+"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAARUlEQVQoU2NkIBIwwtQ9ZXjaIM0g3YCsD1kMrhCkAFkCXSOKidhcAbMFw2qQSSANIAVYrYYpQDcVq4kkWU3Q10RbTSjcAYeoJwudlydRAAAAAElFTkSuQmCC"
+   ) repeat;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.StandupWrapper {
+  font-size: 6em;
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
+}
+
+ul {
+  width: 60%;
+  list-style-type: none;
+  padding-inline-start: 0;
+  background-color: aliceblue;
+  padding: 20px 80px;
+  border-radius: 40px;
+  box-shadow: 5px 5px 2.5px 0px rgb(0 0 0 / 75%);
+}
+
+li {
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+    font-size: 0.7em;
+}
+
+input[type="text"] {
+  padding: 20px;
+  font-size: 0.3em;
+}
+
+form {
+  cursor: initial;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.BtnGroup {
+  margin-top: 20px;
+  display: flex;
+  width: 70%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.PrimaryButton {
+  margin: 5px;
+  width: 60%;
+  padding: 20px;
+  background-color: hotpink;
+  cursor: pointer;
+  color: #151111;
+  font-weight: 700;
+  border-radius: 40px;
+  font-size: 0.7em;
+  outline: none;
+  box-shadow: 5px 5px 2.5px 0px rgb(0 0 0 / 75%);
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.PrimaryButton.selected {
+  box-shadow: inset 5px 5px 2.5px 0px rgb(0 0 0 / 75%);
+  background-color: deeppink;
+}
+
+.SecondaryButton {
+  margin: 5px;
+  padding: 20px;
+  cursor: pointer;
+  color: #151111;
+  font-weight: 400;
+  border-radius: 40px;
+  font-size: 0.3em;
+  outline: none;
+  box-shadow: 5px 5px 2.5px 0px rgb(0 0 0 / 75%);
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.Member {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Member::after {
+  content: "🗣";
+}
+
+.MemberDone {
+  opacity: 0.7;
+}
+
+.MemberDone::after {
+  content: "✅";
+}
+
+.MemberDone > .MemberName {
+  text-decoration: line-through;
+}
+
+.Member > .DeleteEmoji .DeleteEmoji::hover {
+  content: "❌";
 }
