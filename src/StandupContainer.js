@@ -40,19 +40,17 @@ function StandupContainer() {
         { name: "Alex", done: false },
         { name: "Julia", done: false },
         { name: "Harry", done: false },
-        { name: "Jason", done: false },
-        { name: "Marcio", done: false },
         { name: "Marcus", done: false },
         { name: "Andy", done: false },
         { name: "Göran", done: false },
-        { name: "Pierre", done: false },
+        { name: "Deepshika", done: false },
       ];
       localStorage.setItem("yoloMembers", JSON.stringify(yolo));
       return JSON.stringify(yolo);
     }
   }, []);
 
-  useMemo(() => {
+  const champsMembers = useMemo(() => {
     if (localStorage.getItem("champsMembers")) {
       return localStorage.getItem("champsMembers");
     } else {
@@ -64,19 +62,17 @@ function StandupContainer() {
         { name: "Carl-Axel", done: false },
         { name: "Happy", done: false },
         { name: "Harry", done: false },
-        { name: "Jason", done: false },
-        { name: "Marcio", done: false },
         { name: "Marcus", done: false },
         { name: "Andy", done: false },
         { name: "Göran", done: false },
-        { name: "Pierre", done: false },
+        { name: "Deepshika", done: false },
       ];
       localStorage.setItem("champsMembers", JSON.stringify(champs));
       return JSON.stringify(champs);
     }
   }, []);
 
-  useMemo(() => {
+  const unityMembers = useMemo(() => {
     if (localStorage.getItem("unityMembers")) {
       return localStorage.getItem("unityMembers");
     } else {
@@ -89,13 +85,11 @@ function StandupContainer() {
         { name: "Plamen", done: false },
         { name: "Stoil", done: false },
         { name: "Mihail", done: false },
-        { name: "Jason", done: false },
-        { name: "Marcio", done: false },
         { name: "Marcus", done: false },
         { name: "Harry", done: false },
         { name: "Andy", done: false },
         { name: "Göran", done: false },
-        { name: "Pierre", done: false },
+        { name: "Deepshika", done: false },
       ];
       localStorage.setItem("unityMembers", JSON.stringify(unity));
       return JSON.stringify(unity);
@@ -130,6 +124,29 @@ function StandupContainer() {
         JSON.stringify(updatedMembers)
       );
       setNewMember("");
+    }
+  };
+
+  const resetTeams = () => {
+    const confirmed = confirm("are you sure?"); // eslint-disable-line
+
+    if (!confirmed) return;
+    localStorage.setItem("yoloMembers", yoloMembers);
+    localStorage.setItem("champsMembers", champsMembers);
+    localStorage.setItem("unityMembers", unityMembers);
+
+    switch (selectedTeam) {
+      case "yolo":
+        setMembers(JSON.parse(yoloMembers));
+        break;
+      case "champs":
+        setMembers(JSON.parse(champsMembers));
+        break;
+      case "unity":
+        setMembers(JSON.parse(unityMembers));
+        break;
+      default:
+        break;
     }
   };
 
@@ -226,10 +243,15 @@ function StandupContainer() {
             <input
               className="SecondaryButton"
               type="submit"
-              value="Add member"
+              value="ADD MEMBER"
             />
           </form>
         </li>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button className="SecondaryButton" onClick={() => resetTeams()}>
+            RESET ALL TEAMS
+          </button>
+        </div>
       </ul>
       <button
         className="PrimaryButton"
