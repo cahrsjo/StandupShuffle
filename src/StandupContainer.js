@@ -43,7 +43,7 @@ function StandupContainer() {
         { name: "Marcus", done: false },
         { name: "Andy", done: false },
         { name: "Göran", done: false },
-        { name: "Deepshika", done: false },
+        { name: "Deepshikha", done: false },
       ];
       localStorage.setItem("yoloMembers", JSON.stringify(yolo));
       return JSON.stringify(yolo);
@@ -65,7 +65,7 @@ function StandupContainer() {
         { name: "Marcus", done: false },
         { name: "Andy", done: false },
         { name: "Göran", done: false },
-        { name: "Deepshika", done: false },
+        { name: "Deepshikha", done: false },
       ];
       localStorage.setItem("champsMembers", JSON.stringify(champs));
       return JSON.stringify(champs);
@@ -89,7 +89,7 @@ function StandupContainer() {
         { name: "Harry", done: false },
         { name: "Andy", done: false },
         { name: "Göran", done: false },
-        { name: "Deepshika", done: false },
+        { name: "Deepshikha", done: false },
       ];
       localStorage.setItem("unityMembers", JSON.stringify(unity));
       return JSON.stringify(unity);
