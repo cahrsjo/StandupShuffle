@@ -2,6 +2,49 @@ import React, { useState, useMemo } from "react";
 import { shuffle as lodashShuffle } from "lodash";
 import Confetti from "react-confetti";
 
+const yoloOrig = [
+  { name: "Peppe", done: false },
+  { name: "Peter Ö", done: false },
+  { name: "Janaki", done: false },
+  { name: "Alex", done: false },
+  { name: "Julia", done: false },
+  { name: "Harry", done: false },
+  { name: "Marcus", done: false },
+  { name: "Andy", done: false },
+  { name: "Göran", done: false },
+  { name: "Deepshikha", done: false },
+];
+
+const champsOrig = [
+  { name: "Tommy", done: false },
+  { name: "Jonas", done: false },
+  { name: "Samira", done: false },
+  { name: "Edvan", done: false },
+  { name: "Carl-Axel", done: false },
+  { name: "Happy", done: false },
+  { name: "Harry", done: false },
+  { name: "Marcus", done: false },
+  { name: "Andy", done: false },
+  { name: "Göran", done: false },
+  { name: "Deepshikha", done: false },
+];
+
+const unityOrig = [
+  { name: "Tereza", done: false },
+  { name: "Vassil", done: false },
+  { name: "Krasimir", done: false },
+  { name: "Georgi", done: false },
+  { name: "Nedyalko", done: false },
+  { name: "Plamen", done: false },
+  { name: "Stoil", done: false },
+  { name: "Mihail", done: false },
+  { name: "Marcus", done: false },
+  { name: "Harry", done: false },
+  { name: "Andy", done: false },
+  { name: "Göran", done: false },
+  { name: "Deepshikha", done: false },
+];
+
 function StandupContainer() {
   const baseEmojis = useMemo(
     () => [
@@ -33,66 +76,26 @@ function StandupContainer() {
     if (localStorage.getItem("yoloMembers")) {
       return localStorage.getItem("yoloMembers");
     } else {
-      const yolo = [
-        { name: "Peppe", done: false },
-        { name: "Peter Ö", done: false },
-        { name: "Janaki", done: false },
-        { name: "Alex", done: false },
-        { name: "Julia", done: false },
-        { name: "Harry", done: false },
-        { name: "Marcus", done: false },
-        { name: "Andy", done: false },
-        { name: "Göran", done: false },
-        { name: "Deepshikha", done: false },
-      ];
-      localStorage.setItem("yoloMembers", JSON.stringify(yolo));
-      return JSON.stringify(yolo);
+      localStorage.setItem("yoloMembers", JSON.stringify(yoloOrig));
+      return JSON.stringify(yoloOrig);
     }
   }, []);
 
-  const champsMembers = useMemo(() => {
+  useMemo(() => {
     if (localStorage.getItem("champsMembers")) {
       return localStorage.getItem("champsMembers");
     } else {
-      const champs = [
-        { name: "Tommy", done: false },
-        { name: "Jonas", done: false },
-        { name: "Samira", done: false },
-        { name: "Edvan", done: false },
-        { name: "Carl-Axel", done: false },
-        { name: "Happy", done: false },
-        { name: "Harry", done: false },
-        { name: "Marcus", done: false },
-        { name: "Andy", done: false },
-        { name: "Göran", done: false },
-        { name: "Deepshikha", done: false },
-      ];
-      localStorage.setItem("champsMembers", JSON.stringify(champs));
-      return JSON.stringify(champs);
+      localStorage.setItem("champsMembers", JSON.stringify(champsOrig));
+      return JSON.stringify(champsOrig);
     }
   }, []);
 
-  const unityMembers = useMemo(() => {
+  useMemo(() => {
     if (localStorage.getItem("unityMembers")) {
       return localStorage.getItem("unityMembers");
     } else {
-      const unity = [
-        { name: "Tereza", done: false },
-        { name: "Vassil", done: false },
-        { name: "Krasimir", done: false },
-        { name: "Georgi", done: false },
-        { name: "Nedyalko", done: false },
-        { name: "Plamen", done: false },
-        { name: "Stoil", done: false },
-        { name: "Mihail", done: false },
-        { name: "Marcus", done: false },
-        { name: "Harry", done: false },
-        { name: "Andy", done: false },
-        { name: "Göran", done: false },
-        { name: "Deepshikha", done: false },
-      ];
-      localStorage.setItem("unityMembers", JSON.stringify(unity));
-      return JSON.stringify(unity);
+      localStorage.setItem("unityMembers", JSON.stringify(unityOrig));
+      return JSON.stringify(unityOrig);
     }
   }, []);
 
@@ -131,19 +134,19 @@ function StandupContainer() {
     const confirmed = confirm("are you sure?"); // eslint-disable-line
 
     if (!confirmed) return;
-    localStorage.setItem("yoloMembers", yoloMembers);
-    localStorage.setItem("champsMembers", champsMembers);
-    localStorage.setItem("unityMembers", unityMembers);
+    localStorage.setItem("yoloMembers", JSON.stringify(yoloOrig));
+    localStorage.setItem("champsMembers", JSON.stringify(champsOrig));
+    localStorage.setItem("unityMembers", JSON.stringify(unityOrig));
 
     switch (selectedTeam) {
       case "yolo":
-        setMembers(JSON.parse(yoloMembers));
+        setMembers(yoloOrig);
         break;
       case "champs":
-        setMembers(JSON.parse(champsMembers));
+        setMembers(champsOrig);
         break;
       case "unity":
-        setMembers(JSON.parse(unityMembers));
+        setMembers(unityOrig);
         break;
       default:
         break;
