@@ -204,6 +204,7 @@ function StandupContainer() {
         <>
           {members.every((m) => m.done) && (
             <Confetti
+              numberOfPieces={100}
               width={window.innerWidth}
               height={window.window.innerHeight}
             />
@@ -270,6 +271,22 @@ function StandupContainer() {
               );
             })}
             <li>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginBottom: "10px",
+                }}
+              >
+                <div>
+                  <input type="checkbox" />
+                  <span>Check bugs</span>
+                </div>
+                <div>
+                  <input type="checkbox" />
+                  <span>Check Jenkins</span>
+                </div>
+              </div>
               <form onSubmit={submitNewMember}>
                 <input
                   type="text"
