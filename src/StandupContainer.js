@@ -115,6 +115,10 @@ function StandupContainer() {
   const [emojis, setEmojis] = useState(baseEmojis);
   const [selectedTeam, setSelectedTeam] = useState("yolo");
   const [newMember, setNewMember] = useState("");
+  const [additionalInfo, setAdditionalInfo] = useState([
+    { task: "bugs", done: false },
+    { task: "jenkins", done: false },
+  ]);
   const [loading, setLoading] = useState(true);
   const [loadText, setLoadText] = useState(shuffle(loadingTexts)[0]);
 
@@ -188,27 +192,38 @@ function StandupContainer() {
     setNewMember(event.target.value);
   };
 
+  const updateAdditionalInfo = (task) => {
+    const changedTasks = additionalInfo.map((t) => {
+      if (t.task === task) {
+        t.done = !t.done;
+      }
+      return t;
+    });
+    setAdditionalInfo(changedTasks);
+  };
+
   return (
     <div className="StandupWrapper">
       {loading ? (
         <div className="pizzaWrapper">
-          <div class="spinner">
-            <img src={pizza} class="pizza-part pizza-part-1" alt="pizza1" />
-            <img src={pizza} class="pizza-part pizza-part-2" alt="pizza2" />
-            <img src={pizza} class="pizza-part pizza-part-3" alt="pizza3" />
-            <img src={pizza} class="pizza-part pizza-part-4" alt="pizza4" />
+          <div className="spinner">
+            <img src={pizza} className="pizza-part pizza-part-1" alt="pizza1" />
+            <img src={pizza} className="pizza-part pizza-part-2" alt="pizza2" />
+            <img src={pizza} className="pizza-part pizza-part-3" alt="pizza3" />
+            <img src={pizza} className="pizza-part pizza-part-4" alt="pizza4" />
           </div>
           <div className="loadingText">{loadText}</div>
         </div>
       ) : (
         <>
-          {members.every((m) => m.done) && (
-            <Confetti
-              numberOfPieces={100}
-              width={window.innerWidth}
-              height={window.window.innerHeight}
-            />
-          )}
+          {members.every((m) => m.done) &&
+            additionalInfo.every((t) => t.done) && (
+              <Confetti
+                numberOfPieces={100}
+                width={window.innerWidth}
+                height={window.window.innerHeight}
+              />
+            )}
           <div className="BtnGroup">
             <button
               className={
@@ -279,11 +294,17 @@ function StandupContainer() {
                 }}
               >
                 <div>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    onChange={() => updateAdditionalInfo("bugs")}
+                  />
                   <span>Check bugs</span>
                 </div>
                 <div>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    onChange={() => updateAdditionalInfo("jenkins")}
+                  />
                   <span>Check Jenkins</span>
                 </div>
               </div>
