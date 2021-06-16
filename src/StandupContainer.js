@@ -117,6 +117,7 @@ function StandupContainer() {
   const [newMember, setNewMember] = useState("");
   const [additionalInfo, setAdditionalInfo] = useState([
     { task: "bugs", done: false },
+    { task: "pr", done: false },
     { task: "jenkins", done: false },
   ]);
   const [loading, setLoading] = useState(true);
@@ -126,7 +127,7 @@ function StandupContainer() {
     if (loading) {
       setTimeout(() => {
         setLoading(false);
-      }, 4000);
+      }, 2000);
     }
   });
 
@@ -298,14 +299,21 @@ function StandupContainer() {
                     type="checkbox"
                     onChange={() => updateAdditionalInfo("bugs")}
                   />
-                  <span>Check bugs</span>
+                  <span>Bugs</span>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    onChange={() => updateAdditionalInfo("pr")}
+                  />
+                  <span>Open PRs</span>
                 </div>
                 <div>
                   <input
                     type="checkbox"
                     onChange={() => updateAdditionalInfo("jenkins")}
                   />
-                  <span>Check Jenkins</span>
+                  <span>Jenkins</span>
                 </div>
               </div>
               <form onSubmit={submitNewMember}>

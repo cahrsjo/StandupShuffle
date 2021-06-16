@@ -149,19 +149,19 @@ form {
 }
 
 .pizza-part-1 {
-  animation: pizza1 4s ease-in-out infinite;
+  animation: pizza1 2s ease-in-out infinite;
 }
 
 .pizza-part-2 {
-  animation: pizza2 4s ease-in-out infinite;
+  animation: pizza2 2s ease-in-out infinite;
 }
 
 .pizza-part-3 {
-  animation: pizza4 4s ease-in-out infinite;
+  animation: pizza4 2s ease-in-out infinite;
 }
 
 .pizza-part-4 {
-  animation: pizza3 4s ease-in-out infinite;
+  animation: pizza3 2s ease-in-out infinite;
 }
 
 /* animations */
