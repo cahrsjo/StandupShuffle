@@ -1,50 +1,8 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { shuffle as lodashShuffle } from "lodash";
+import { shuffle } from "lodash";
 import Confetti from "react-confetti";
 import pizza from "./pizza.png";
-
-const yoloOrig = [
-  { name: "Peppe", done: false },
-  { name: "Peter Ö", done: false },
-  { name: "Janaki", done: false },
-  { name: "Alex", done: false },
-  { name: "Julia", done: false },
-  { name: "Harry", done: false },
-  { name: "Marcus", done: false },
-  { name: "Andy", done: false },
-  { name: "Göran", done: false },
-  { name: "Deepshikha", done: false },
-];
-
-const champsOrig = [
-  { name: "Tommy", done: false },
-  { name: "Jonas", done: false },
-  { name: "Samira", done: false },
-  { name: "Edvan", done: false },
-  { name: "Carl-Axel", done: false },
-  { name: "Happy", done: false },
-  { name: "Harry", done: false },
-  { name: "Marcus", done: false },
-  { name: "Andy", done: false },
-  { name: "Göran", done: false },
-  { name: "Deepshikha", done: false },
-];
-
-const unityOrig = [
-  { name: "Tereza", done: false },
-  { name: "Vassil", done: false },
-  { name: "Krasimir", done: false },
-  { name: "Georgi", done: false },
-  { name: "Nedyalko", done: false },
-  { name: "Plamen", done: false },
-  { name: "Stoil", done: false },
-  { name: "Mihail", done: false },
-  { name: "Marcus", done: false },
-  { name: "Harry", done: false },
-  { name: "Andy", done: false },
-  { name: "Göran", done: false },
-  { name: "Deepshikha", done: false },
-];
+import EmptyState from "./EmptyState.js";
 
 const loadingTexts = [
   "Stringing the cheese...",
@@ -82,38 +40,18 @@ function StandupContainer() {
     ],
     []
   );
-  const shuffle = (arr) => lodashShuffle(arr);
 
-  const yoloMembers = useMemo(() => {
-    if (localStorage.getItem("yoloMembers")) {
-      return localStorage.getItem("yoloMembers");
-    } else {
-      localStorage.setItem("yoloMembers", JSON.stringify(yoloOrig));
-      return JSON.stringify(yoloOrig);
+  const savedMembers = useMemo(() => {
+    if (localStorage.getItem("members")) {
+      return localStorage.getItem("members");
     }
+    return [];
   }, []);
 
-  useMemo(() => {
-    if (localStorage.getItem("champsMembers")) {
-      return localStorage.getItem("champsMembers");
-    } else {
-      localStorage.setItem("champsMembers", JSON.stringify(champsOrig));
-      return JSON.stringify(champsOrig);
-    }
-  }, []);
-
-  useMemo(() => {
-    if (localStorage.getItem("unityMembers")) {
-      return localStorage.getItem("unityMembers");
-    } else {
-      localStorage.setItem("unityMembers", JSON.stringify(unityOrig));
-      return JSON.stringify(unityOrig);
-    }
-  }, []);
-
-  const [members, setMembers] = useState(JSON.parse(yoloMembers));
+  const [members, setMembers] = useState(
+    !savedMembers.length ? savedMembers : JSON.parse(savedMembers)
+  );
   const [emojis, setEmojis] = useState(baseEmojis);
-  const [selectedTeam, setSelectedTeam] = useState("yolo");
   const [newMember, setNewMember] = useState("");
   const [additionalInfo, setAdditionalInfo] = useState([
     { task: "bugs", done: false },
@@ -145,37 +83,26 @@ function StandupContainer() {
   const submitNewMember = (event) => {
     event.preventDefault();
     if (newMember) {
+      if (members.some((m) => m.name === newMember)) {
+        alert("Participant already exists!");
+        return;
+      }
       const updatedMembers = [...members, { name: newMember, done: false }];
       setMembers(updatedMembers);
-      localStorage.setItem(
-        `${selectedTeam}Members`,
-        JSON.stringify(updatedMembers)
-      );
+      localStorage.setItem("members", JSON.stringify(updatedMembers));
       setNewMember("");
     }
   };
 
   const resetTeams = () => {
-    const confirmed = confirm("are you sure?"); // eslint-disable-line
+    // eslint-disable-next-line
+    const confirmed = confirm(
+      "Are you sure? All participants will be deleted."
+    );
 
     if (!confirmed) return;
-    localStorage.setItem("yoloMembers", JSON.stringify(yoloOrig));
-    localStorage.setItem("champsMembers", JSON.stringify(champsOrig));
-    localStorage.setItem("unityMembers", JSON.stringify(unityOrig));
-
-    switch (selectedTeam) {
-      case "yolo":
-        setMembers(yoloOrig);
-        break;
-      case "champs":
-        setMembers(champsOrig);
-        break;
-      case "unity":
-        setMembers(unityOrig);
-        break;
-      default:
-        break;
-    }
+    localStorage.setItem("members", []);
+    setMembers([]);
   };
 
   const removeMember = (event, member) => {
@@ -183,10 +110,7 @@ function StandupContainer() {
     const updatedMembers = members.filter((mem) => mem.name !== member);
     setMembers(updatedMembers);
     setEmojis(shuffle(baseEmojis));
-    localStorage.setItem(
-      `${selectedTeam}Members`,
-      JSON.stringify(updatedMembers)
-    );
+    localStorage.setItem("members", JSON.stringify(updatedMembers));
   };
 
   const handleChange = (event) => {
@@ -225,71 +149,35 @@ function StandupContainer() {
                 height={window.window.innerHeight}
               />
             )}
-          <div className="BtnGroup">
-            <button
-              className={
-                selectedTeam === "yolo"
-                  ? "PrimaryButton selected"
-                  : "PrimaryButton"
-              }
-              onClick={() => {
-                setSelectedTeam("yolo");
-                setMembers(JSON.parse(localStorage.getItem("yoloMembers")));
-              }}
-            >
-              YOLO
-            </button>
-            <button
-              className={
-                selectedTeam === "champs"
-                  ? "PrimaryButton selected"
-                  : "PrimaryButton"
-              }
-              onClick={() => {
-                setSelectedTeam("champs");
-                setMembers(JSON.parse(localStorage.getItem("champsMembers")));
-              }}
-            >
-              CHAMPS
-            </button>
-            <button
-              className={
-                selectedTeam === "unity"
-                  ? "PrimaryButton selected"
-                  : "PrimaryButton"
-              }
-              onClick={() => {
-                setSelectedTeam("unity");
-                setMembers(JSON.parse(localStorage.getItem("unityMembers")));
-              }}
-            >
-              UNITY
-            </button>
-          </div>
+
           <ul>
-            {members.map((member, i) => {
-              return (
-                <li key={member.name}>
-                  <div
-                    onClick={() => checkMember(member.name)}
-                    className={member.done ? "Member MemberDone" : "Member"}
-                  >
+            {!members.length ? (
+              <EmptyState />
+            ) : (
+              members.map((member, i) => {
+                return (
+                  <li key={member.name}>
                     <div
-                      className="DeleteEmoji"
-                      title="Click to delete"
-                      onClick={(ev) => removeMember(ev, member.name)}
+                      onClick={() => checkMember(member.name)}
+                      className={member.done ? "Member MemberDone" : "Member"}
                     >
-                      {emojis[i]}
+                      <div
+                        className="DeleteEmoji"
+                        title="Click to delete"
+                        onClick={(ev) => removeMember(ev, member.name)}
+                      >
+                        {emojis[i]}
+                      </div>
+                      <div className="MemberName">{member.name}</div>
                     </div>
-                    <div className="MemberName">{member.name}</div>
-                  </div>
-                </li>
-              );
-            })}
+                  </li>
+                );
+              })
+            )}
             <li>
               <div
                 style={{
-                  display: "flex",
+                  display: members.length ? "flex" : "none",
                   justifyContent: "space-between",
                   marginBottom: "10px",
                 }}
@@ -319,20 +207,20 @@ function StandupContainer() {
               <form onSubmit={submitNewMember}>
                 <input
                   type="text"
-                  placeholder="Not on the list?"
+                  placeholder="Participant name"
                   value={newMember}
                   onChange={handleChange}
                 />
                 <input
                   className="SecondaryButton"
                   type="submit"
-                  value="ADD MEMBER"
+                  value="ADD PARTICIPANT"
                 />
               </form>
             </li>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <button className="SecondaryButton" onClick={() => resetTeams()}>
-                RESET ALL TEAMS
+                RESET EVERYTHING
               </button>
             </div>
           </ul>
