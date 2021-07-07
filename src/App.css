@@ -16,12 +16,13 @@
 
 ul {
   width: 60%;
+  min-height: 60vh;
   list-style-type: none;
   padding-inline-start: 0;
   background-color: aliceblue;
   padding: 20px 80px;
   border-radius: 40px;
-  box-shadow: 5px 5px 2.5px 0px rgb(0 0 0 / 75%);
+  box-shadow: 2px 2px 2px 0px rgb(0 0 0 / 50%);
   overflow-y: scroll;
 }
 
@@ -69,31 +70,27 @@ form {
   border-radius: 40px;
   font-size: 0.7em;
   outline: none;
-  box-shadow: 5px 5px 2.5px 0px rgb(0 0 0 / 75%);
+  box-shadow: 2px 2px 2px 0px rgb(0 0 0 / 50%);
   font-family: "Comic Sans MS", "Comic Sans", cursive;
-}
-
-.PrimaryButton.selected {
-  box-shadow: inset 5px 5px 2.5px 0px rgb(0 0 0 / 75%);
-  background-color: deeppink;
 }
 
 .SecondaryButton {
   margin: 5px;
-  padding: 20px;
+  padding: 20px 40px;
   cursor: pointer;
   color: #151111;
-  font-weight: 400;
+  font-weight: 700;
   border-radius: 40px;
-  font-size: 0.5em;
+  font-size: 0.6em;
   outline: none;
-  box-shadow: 5px 5px 2.5px 0px rgb(0 0 0 / 75%);
+  box-shadow: 2px 2px 2px 0px rgb(0 0 0 / 50%);
   font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 .Member {
   display: flex;
   justify-content: space-between;
+  font-size: 1.5em;
 }
 
 .Member::after {
@@ -112,8 +109,9 @@ form {
   text-decoration: line-through;
 }
 
-.Member > .DeleteEmoji .DeleteEmoji::hover {
+.DeleteEmoji:hover::before {
   content: "❌";
+  position: absolute;
 }
 
 /* PIZZA */

@@ -6,10 +6,7 @@ export default function EmptyState() {
       style={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
         textAlign: "center",
-        height: "60vh",
       }}
     >
       <h1>🧍‍♀️ Standup Shuffle V2 🧍‍♂️</h1>

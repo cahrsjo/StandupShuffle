@@ -103,6 +103,11 @@ function StandupContainer() {
     if (!confirmed) return;
     localStorage.setItem("members", []);
     setMembers([]);
+    setAdditionalInfo([
+      { task: "bugs", done: false },
+      { task: "pr", done: false },
+      { task: "jenkins", done: false },
+    ]);
   };
 
   const removeMember = (event, member) => {
@@ -185,23 +190,36 @@ function StandupContainer() {
                 <div>
                   <input
                     type="checkbox"
+                    checked={additionalInfo.find(
+                      (a) => a.task === "bugs" && a.done
+                    )}
                     onChange={() => updateAdditionalInfo("bugs")}
                   />
-                  <span>Bugs</span>
+                  <span onClick={() => updateAdditionalInfo("bugs")}>Bugs</span>
                 </div>
                 <div>
                   <input
                     type="checkbox"
+                    checked={additionalInfo.find(
+                      (a) => a.task === "pr" && a.done
+                    )}
                     onChange={() => updateAdditionalInfo("pr")}
                   />
-                  <span>Open PRs</span>
+                  <span onClick={() => updateAdditionalInfo("pr")}>
+                    Open PRs
+                  </span>
                 </div>
                 <div>
                   <input
                     type="checkbox"
+                    checked={additionalInfo.find(
+                      (a) => a.task === "jenkins" && a.done
+                    )}
                     onChange={() => updateAdditionalInfo("jenkins")}
                   />
-                  <span>Jenkins</span>
+                  <span onClick={() => updateAdditionalInfo("jenkins")}>
+                    Jenkins
+                  </span>
                 </div>
               </div>
               <form onSubmit={submitNewMember}>
@@ -211,11 +229,7 @@ function StandupContainer() {
                   value={newMember}
                   onChange={handleChange}
                 />
-                <input
-                  className="SecondaryButton"
-                  type="submit"
-                  value="ADD PARTICIPANT"
-                />
+                <input className="SecondaryButton" type="submit" value="ADD" />
               </form>
             </li>
             <div style={{ display: "flex", justifyContent: "center" }}>
