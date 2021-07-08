@@ -48,11 +48,20 @@ function StandupContainer() {
     return [];
   }, []);
 
+  const savedTeamName = useMemo(() => {
+    if (localStorage.getItem("teamName")) {
+      return localStorage.getItem("teamName");
+    }
+    return "";
+  }, []);
+
   const [members, setMembers] = useState(
     !savedMembers.length ? savedMembers : JSON.parse(savedMembers)
   );
+  const [teamName, setTeamName] = useState(savedTeamName);
   const [emojis, setEmojis] = useState(baseEmojis);
   const [newMember, setNewMember] = useState("");
+  const [newTeamName, setNewTeamName] = useState("");
   const [additionalInfo, setAdditionalInfo] = useState([
     { task: "bugs", done: false },
     { task: "pr", done: false },
@@ -94,6 +103,15 @@ function StandupContainer() {
     }
   };
 
+  const submitTeamName = (event) => {
+    event.preventDefault();
+    if (newTeamName) {
+      setTeamName(newTeamName);
+      localStorage.setItem("teamName", newTeamName);
+      setNewTeamName("");
+    }
+  };
+
   const resetTeams = () => {
     // eslint-disable-next-line
     const confirmed = confirm(
@@ -102,12 +120,14 @@ function StandupContainer() {
 
     if (!confirmed) return;
     localStorage.setItem("members", []);
+    localStorage.setItem("teamName", "");
     setMembers([]);
     setAdditionalInfo([
       { task: "bugs", done: false },
       { task: "pr", done: false },
       { task: "jenkins", done: false },
     ]);
+    setTeamName("");
   };
 
   const removeMember = (event, member) => {
@@ -118,8 +138,12 @@ function StandupContainer() {
     localStorage.setItem("members", JSON.stringify(updatedMembers));
   };
 
-  const handleChange = (event) => {
-    setNewMember(event.target.value);
+  const handleChange = (part) => (event) => {
+    if (part === "member") {
+      setNewMember(event.target.value);
+    } else {
+      setNewTeamName(event.target.value);
+    }
   };
 
   const updateAdditionalInfo = (task) => {
@@ -156,6 +180,51 @@ function StandupContainer() {
             )}
 
           <ul>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: "10px",
+              }}
+            >
+              {teamName ? (
+                <>
+                  ✨&nbsp;
+                  <div
+                    title="Edit team name"
+                    style={{
+                      textTransform: "uppercase",
+                      textDecoration: "underline",
+                      textDecorationStyle: "wavy",
+                      textDecorationColor: "hotpink",
+                      textUnderlineOffset: "0.1em",
+                      fontWeight: 700,
+                      fontSize: "1.95em",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setTeamName("")}
+                  >
+                    {teamName}
+                  </div>
+                  &nbsp;✨
+                </>
+              ) : (
+                <form onSubmit={submitTeamName}>
+                  <input
+                    type="text"
+                    placeholder="Team name"
+                    value={newTeamName}
+                    onChange={handleChange("team")}
+                  />
+                  <input
+                    className="SecondaryButton"
+                    type="submit"
+                    value="SAVE"
+                    disabled={!newTeamName}
+                  />
+                </form>
+              )}
+            </div>
             {!members.length ? (
               <EmptyState />
             ) : (
@@ -227,12 +296,23 @@ function StandupContainer() {
                   type="text"
                   placeholder="Participant name"
                   value={newMember}
-                  onChange={handleChange}
+                  onChange={handleChange("member")}
                 />
-                <input className="SecondaryButton" type="submit" value="ADD" />
+                <input
+                  className="SecondaryButton"
+                  type="submit"
+                  value="ADD"
+                  disabled={!newMember}
+                />
               </form>
             </li>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                fontSize: "0.7em",
+              }}
+            >
               <button className="SecondaryButton" onClick={() => resetTeams()}>
                 RESET EVERYTHING
               </button>
