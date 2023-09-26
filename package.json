@@ -1,6 +1,6 @@
 {
   "name": "standup-shuffle",
-  "homepage": "http://cahrsjo.github.io/StandupShuffle",
+  "homepage": "https://cahrsjo.github.io/StandupShuffle",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
