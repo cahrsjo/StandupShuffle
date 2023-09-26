@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/StandupShuffle/static/css/main.f78157e3.chunk.css",
+    "main.js": "/StandupShuffle/static/js/main.52d81c57.chunk.js",
+    "main.js.map": "/StandupShuffle/static/js/main.52d81c57.chunk.js.map",
+    "runtime-main.js": "/StandupShuffle/static/js/runtime-main.edb17d30.js",
+    "runtime-main.js.map": "/StandupShuffle/static/js/runtime-main.edb17d30.js.map",
+    "static/js/2.8f4f65a0.chunk.js": "/StandupShuffle/static/js/2.8f4f65a0.chunk.js",
+    "static/js/2.8f4f65a0.chunk.js.map": "/StandupShuffle/static/js/2.8f4f65a0.chunk.js.map",
+    "static/js/3.61ba3cc4.chunk.js": "/StandupShuffle/static/js/3.61ba3cc4.chunk.js",
+    "static/js/3.61ba3cc4.chunk.js.map": "/StandupShuffle/static/js/3.61ba3cc4.chunk.js.map",
+    "index.html": "/StandupShuffle/index.html",
+    "static/css/main.f78157e3.chunk.css.map": "/StandupShuffle/static/css/main.f78157e3.chunk.css.map",
+    "static/js/2.8f4f65a0.chunk.js.LICENSE.txt": "/StandupShuffle/static/js/2.8f4f65a0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.edb17d30.js",
+    "static/js/2.8f4f65a0.chunk.js",
+    "static/css/main.f78157e3.chunk.css",
+    "static/js/main.52d81c57.chunk.js"
+  ]
+}
