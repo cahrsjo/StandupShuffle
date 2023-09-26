@@ -9,7 +9,7 @@ export default function EmptyState() {
         textAlign: "center",
       }}
     >
-      <h1>🧍‍♀️ Standup Shuffle V2 🧍‍♂️</h1>
+      <h1>🧍‍♀️ Standup Shuffle 🧍‍♂️</h1>
       <div style={{ lineHeight: "2em", marginBottom: "2em" }}>
         <div>You haven't added any participants yet.</div>
         <div>Please add them in the input below, then hit Shuffle!</div>
