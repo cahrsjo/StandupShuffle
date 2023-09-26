@@ -65,10 +65,10 @@ function StandupContainer() {
   const [additionalInfo, setAdditionalInfo] = useState([
     { task: "bugs", done: false },
     { task: "pr", done: false },
-    { task: "jenkins", done: false },
+    { task: "pipelines", done: false },
   ]);
   const [loading, setLoading] = useState(true);
-  const [loadText, setLoadText] = useState(shuffle(loadingTexts)[0]);
+  const loadText = shuffle(loadingTexts)[0];
 
   useEffect(() => {
     if (loading) {
@@ -125,7 +125,7 @@ function StandupContainer() {
     setAdditionalInfo([
       { task: "bugs", done: false },
       { task: "pr", done: false },
-      { task: "jenkins", done: false },
+      { task: "pipelines", done: false },
     ]);
     setTeamName("");
   };
@@ -197,7 +197,7 @@ function StandupContainer() {
                       textDecoration: "underline",
                       textDecorationStyle: "wavy",
                       textDecorationColor: "hotpink",
-                      textUnderlineOffset: "0.1em",
+                      textUnderlineOffset: "0.2em",
                       fontWeight: 700,
                       fontSize: "1.95em",
                       cursor: "pointer",
@@ -282,12 +282,12 @@ function StandupContainer() {
                   <input
                     type="checkbox"
                     checked={additionalInfo.find(
-                      (a) => a.task === "jenkins" && a.done
+                      (a) => a.task === "pipelines" && a.done
                     )}
-                    onChange={() => updateAdditionalInfo("jenkins")}
+                    onChange={() => updateAdditionalInfo("pipelines")}
                   />
-                  <span onClick={() => updateAdditionalInfo("jenkins")}>
-                    Jenkins
+                  <span onClick={() => updateAdditionalInfo("pipelines")}>
+                    Pipelines
                   </span>
                 </div>
               </div>
