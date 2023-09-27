@@ -1,7 +1,6 @@
 .App {
-  background:url(
-"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAARUlEQVQoU2NkIBIwwtQ9ZXjaIM0g3YCsD1kMrhCkAFkCXSOKidhcAbMFw2qQSSANIAVYrYYpQDcVq4kkWU3Q10RbTSjcAYeoJwudlydRAAAAAElFTkSuQmCC"
-   ) repeat;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAARUlEQVQoU2NkIBIwwtQ9ZXjaIM0g3YCsD1kMrhCkAFkCXSOKidhcAbMFw2qQSSANIAVYrYYpQDcVq4kkWU3Q10RbTSjcAYeoJwudlydRAAAAAElFTkSuQmCC")
+    repeat;
 }
 
 .StandupWrapper {
@@ -11,7 +10,6 @@
   align-items: center;
   height: 100vh;
   font-family: "Comic Sans MS", "Comic Sans", cursive;
-
 }
 
 ul {
@@ -85,6 +83,11 @@ form {
   outline: none;
   box-shadow: 2px 2px 2px 0px rgb(0 0 0 / 50%);
   font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+.PrimaryButton:disabled,
+.SecondaryButton:disabled {
+  cursor: not-allowed;
 }
 
 .Member {
@@ -277,4 +280,3 @@ form {
     opacity: 0;
   }
 }
-
