@@ -209,7 +209,7 @@ function StandupContainer() {
                   &nbsp;✨
                 </>
               ) : (
-                <form onSubmit={submitTeamName}>
+                <form className="FormWrapper" onSubmit={submitTeamName}>
                   <input
                     type="text"
                     placeholder="Team name"
@@ -250,6 +250,7 @@ function StandupContainer() {
             )}
             <li>
               <div
+                className="AdditionalInfo"
                 style={{
                   display: members.length ? "flex" : "none",
                   justifyContent: "space-between",
@@ -291,7 +292,7 @@ function StandupContainer() {
                   </span>
                 </div>
               </div>
-              <form onSubmit={submitNewMember}>
+              <form className="FormWrapper" onSubmit={submitNewMember}>
                 <input
                   type="text"
                   placeholder="Participant name"

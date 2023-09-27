@@ -167,6 +167,17 @@ form {
   animation: pizza3 2s ease-in-out infinite;
 }
 
+@media (max-width: 480px) {
+  .FormWrapper {
+    display: grid;
+  }
+
+  .AdditionalInfo {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 /* animations */
 @keyframes spin {
   0% {
